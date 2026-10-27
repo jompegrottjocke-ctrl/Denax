@@ -2,6 +2,10 @@
 
 En enkel studio för trance och techno på Windows 11. Bygg mönster med trummor, bas och synthmelodi och arrangera dem till en låt. All ljudbehandling sker lokalt.
 
+![Denax 0.2 med låtarrangemang, trumsequencer, ljudbank och mixer](docs/images/denax-studio.png)
+
+*Denax 0.2 – arrangera trance och techno med mönster, egna ljud och en inbyggd synth.*
+
 ## Kom igång
 
 Node.js 22 eller 24 och npm krävs.
