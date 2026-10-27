@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="sv">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self'; media-src 'self' blob:; connect-src 'self' blob:; img-src 'self' data:"
+    />
+    <title>Denax — Trance studio</title>
+    <link rel="stylesheet" href="src/style.css" />
+  </head>
+  <body>
+    <aside class="browser">
+      <a class="brand" href="#"
+        >D<span>ENAX</span><small>TRANCE PRODUCTION STUDIO</small></a
+      >
+      <div class="section">LJUDBANK</div>
+      <button id="bank-add" class="wide">+ Importera ljud</button>
+      <p class="hint">One-shots · max 8 sekunder<br />WAV / MP3 / OGG / FLAC</p>
+      <div id="library" class="library"></div>
+      <div class="browser-tip">
+        <strong>Ditt eget sound.</strong>
+        <p>
+          Välj en ljudfil för att provlyssna. Välj sedan en kanal att lägga den
+          på. Dra filer direkt till en kanal för snabb import.
+        </p>
+      </div>
+      <div class="bottom">
+        ● &nbsp; LOKAL LJUDMOTOR<small>Din musik stannar på din dator.</small>
+      </div>
+    </aside>
+    <main>
+      <header>
+        <div>
+          <div class="eyebrow">D E N A X / S T U D I O</div>
+          <h1>Bygg ditt nästa trance-spår.</h1>
+        </div>
+        <div class="project-actions">
+          <button id="undo" disabled>↶ Ångra</button
+          ><button id="redo" disabled>↷ Gör om</button
+          ><button id="load">Öppna</button
+          ><button id="save">Spara projekt</button>
+        </div>
+      </header>
+      <section class="transport">
+        <button id="play" class="primary">▶ Spela</button
+        ><button id="stop" aria-label="Stoppa">■</button
+        ><select id="mode" aria-label="Uppspelningsläge">
+          <option value="song">Låt</option>
+          <option value="loop">Mönsterloop</option></select
+        ><label class="tempo" for="bpm"
+          ><input id="bpm" type="number" min="80" max="180" value="138" /><span
+            >BPM</span
+          ></label
+        ><span class="signature">4/4</span
+        ><output class="position" id="position">1.1.1</output
+        ><span class="engine" id="engine">● Redo</span
+        ><button id="export">↓ Exportera låt</button>
+      </section>
+      <section class="panel arrangement-panel">
+        <div class="panel-header">
+          <div>
+            <div class="eyebrow">01 / ARRANGEMANG</div>
+            <h2>Från första slag till sista drop.</h2>
+          </div>
+          <div class="toolbar">
+            <label
+              >Takter
+              <select id="bars">
+                <option>4</option>
+                <option>8</option>
+                <option>16</option>
+                <option selected>32</option>
+                <option>64</option>
+                <option>128</option>
+              </select></label
+            ><button id="template">Trance-struktur</button
+            ><button id="clear-song">Töm tidslinjen</button>
+          </div>
+        </div>
+        <div class="timeline-scroll"><div id="timeline"></div></div>
+        <div class="panel-foot">
+          <span
+            >Klick: lägg valt mönster · klick igen: ta bort · högerklick:
+            radera</span
+          ><span id="song-length"></span>
+        </div>
+      </section>
+      <section class="pattern-bar">
+        <div>
+          <span class="eyebrow">MÖNSTER</span>
+          <div id="patterns"></div>
+        </div>
+        <div class="toolbar">
+          <button id="duplicate">+ Duplicera</button
+          ><label
+            >Namn
+            <input
+              id="pattern-name"
+              maxlength="24"
+              aria-label="Mönsternamn" /></label
+          ><select id="style" aria-label="Musikstil">
+            <option value="trance">Uplifting trance</option>
+            <option value="techno">Techno</option></select
+          ><button id="random" class="primary">✦ Slumpa trummor</button>
+        </div>
+      </section>
+      <section class="panel editor">
+        <div class="editor-tabs" role="tablist" aria-label="Mönsterredigerare">
+          <button role="tab" id="drum-tab" aria-selected="true">
+            Trumsequencer</button
+          ><button role="tab" id="piano-tab" aria-selected="false">
+            Piano roll</button
+          ><span id="editing-label">Mönster A · 1 takt</span>
+        </div>
+        <div id="drum-editor" role="tabpanel" aria-labelledby="drum-tab">
+          <div class="grid-head">
+            <span>LJUD / KANAL</span>
+            <div id="numbers"></div>
+            <span>NIVÅ</span>
+          </div>
+          <div id="tracks"></div>
+        </div>
+        <div
+          id="piano-editor"
+          role="tabpanel"
+          aria-labelledby="piano-tab"
+          hidden
+        >
+          <div class="piano-tools">
+            <select id="instrument" aria-label="Piano roll instrument">
+              <option value="lead">Trance lead</option>
+              <option value="bass">Bass</option></select
+            ><label
+              >Tonlängd
+              <select id="note-length">
+                <option value="1">1/16</option>
+                <option value="2">1/8</option>
+                <option value="4">1/4</option>
+              </select></label
+            ><label
+              >Oktav
+              <select id="octave">
+                <option value="24">C1–C3</option>
+                <option value="36">C2–C4</option>
+                <option value="48">C3–C5</option>
+                <option value="60" selected>C4–C6</option>
+                <option value="72">C5–C7</option>
+              </select></label
+            ><button id="arp">✦ Nytt arpeggio</button
+            ><button id="clear-notes">Rensa toner</button
+            ><span
+              >Klicka för ton / paus · högerklick raderar · en ton per
+              steg</span
+            >
+          </div>
+          <div class="piano-scroll"><div id="piano"></div></div>
+        </div>
+      </section>
+      <section class="panel mixer-panel">
+        <div class="panel-header">
+          <div>
+            <div class="eyebrow">03 / MIXER</div>
+            <h2>Forma energin.</h2>
+          </div>
+          <div class="toolbar">
+            <label
+              >Lead-filter
+              <input
+                id="cutoff"
+                type="range"
+                min="200"
+                max="10000"
+                step="100" /><output id="cutoff-value"></output></label
+            ><label
+              >Delay <input id="delay" type="range" min="0" max="1" step=".01"
+            /></label>
+          </div>
+        </div>
+        <div id="mixer"></div>
+      </section>
+      <div id="status" role="status" aria-live="polite">
+        Redo. Spela det färdiga 32-takters arrangemanget eller börja med ett
+        eget mönster.
+      </div>
+      <footer class="app-footer">
+        DENAX 0.2 · 4/4 · 16 steg per mönster · WAV 48 kHz stereo · Ctrl+Z:
+        ångra · Mellanslag: spela/pausa
+      </footer>
+    </main>
+    <input
+      type="file"
+      id="bank-input"
+      accept="audio/*,.wav,.mp3,.ogg,.flac"
+      multiple
+      hidden
+    /><input
+      type="file"
+      id="sample-input"
+      accept="audio/*,.wav,.mp3,.ogg,.flac"
+      hidden
+    /><input type="file" id="project-input" accept=".json" hidden />
+    <script type="module" src="src/app.js"></script>
+  </body>
+</html>

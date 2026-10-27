@@ -1,0 +1,38 @@
+{
+  "name": "denax",
+  "version": "0.2.0",
+  "description": "Trance and techno production sketchpad for Windows 11",
+  "main": "electron.cjs",
+  "author": "Denax",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "dev": "node server.cjs",
+    "test": "node --test test/*.test.mjs",
+    "dist:win": "electron-builder --win nsis",
+    "test:ui": "playwright test",
+    "dist:portable": "electron-builder --win portable"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.64.1",
+    "electron": "^38.0.0",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "studio.denax.app",
+    "productName": "Denax",
+    "files": [
+      "index.html",
+      "src/**/*",
+      "electron.cjs"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "src/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  }
+}
