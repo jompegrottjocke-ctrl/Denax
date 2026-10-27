@@ -9,9 +9,9 @@
     "start": "electron .",
     "dev": "node server.cjs",
     "test": "node --test test/*.test.mjs",
-    "dist:win": "electron-builder --win nsis",
+    "dist:win": "electron-builder --win nsis --publish never",
     "test:ui": "playwright test",
-    "dist:portable": "electron-builder --win portable"
+    "dist:portable": "electron-builder --win portable --publish never"
   },
   "devDependencies": {
     "@playwright/test": "^1.64.1",

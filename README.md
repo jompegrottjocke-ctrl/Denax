@@ -45,7 +45,7 @@ npm run dist:win
 npm run dist:portable
 ```
 
-Installationsprogram respektive portabel `.exe` skapas i `dist/`. Ingen kodsignering är konfigurerad. Windows kan visa en varning för ett osignerat program. Installationsförlopp och ljudenhet måste verifieras på Windows 11 före release.
+Installationsprogram respektive portabel `.exe` skapas i `dist/`. Byggkommandona använder `--publish never` och försöker inte skapa en GitHub-release; ingen `GH_TOKEN` behövs för bygget. Ingen kodsignering är konfigurerad. Windows kan visa en varning för ett osignerat program. Installationsförlopp och ljudenhet måste verifieras på Windows 11 före release.
 
 GitHub Actions-flödet **Windows installer** testar och bygger båda paketen på Windows när koden ligger på `main` eller när flödet startas manuellt. Det laddar upp paketen som artifacts, inte som en publik release.
 
